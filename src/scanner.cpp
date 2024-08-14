@@ -27,3 +27,7 @@ int Scanner::extractHeaders(std::string& line){
     std::cout << "Extracting Headers From: " << line << std::endl;
     return 0;
 }
+
+std::string Scanner::nextLine(){
+    return "Linking Worked";
+}

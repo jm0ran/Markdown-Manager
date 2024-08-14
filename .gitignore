@@ -34,3 +34,12 @@
 build/*
 .vscode/*
 .DS_Store
+
+# Bin Folder
+bin/*
+
+# CMakeFiles
+**/CMakeFiles/
+**/Makefile
+**/CMakeCache.txt
+**/cmake_install.cmake
