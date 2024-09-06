@@ -1,6 +1,7 @@
 #include "scanner.hpp"
 #include <iostream>
 #include <fstream>
+#include <regex>
 
 Scanner::Scanner(std::string filePath){
     this->path = filePath;
@@ -24,7 +25,12 @@ void Scanner::scan(){
 }
 
 int Scanner::extractHeaders(std::string& line){
-    std::cout << "Extracting Headers From: " << line << std::endl;
+    // Regex to match headers from range 1-6
+    std::regex headerRegex("^#{1,6} .*");
+    if(std::regex_match(line, headerRegex)){
+        std::cout << "Header Found: " << line << std::endl;
+        return 1;
+    }
     return 0;
 }
 

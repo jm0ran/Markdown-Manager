@@ -16,15 +16,14 @@ public:
     //Returns next line
     std::string nextLine();
 
+    // Checks for headers on the passed line, handles h1-h6
+    int extractHeaders(std::string& line);
+
 private:
     // Variables
     std::string path;
 
     // Methods
-
-
-    // Checks for headers on the passed line, handles h1-h6
-    int extractHeaders(std::string& line);
 
 };
 

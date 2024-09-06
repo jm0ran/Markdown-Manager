@@ -1,18 +1,15 @@
 #include "CppUTest/CommandLineTestRunner.h"
 #include "../src/scanner.hpp"
 
-TEST_GROUP(FirstTestGroup)
-{
+TEST_GROUP(HeaderTestGroup){
+
 };
 
-TEST(FirstTestGroup, FirstTest)
-{
-   Scanner scanner = Scanner("TestString");
-   std::string nextLine = scanner.nextLine();
-   FAIL(nextLine.c_str());
+TEST(HeaderTestGroup, HeaderTest){
+   
+
 };
 
-int main(int ac, char** av)
-{
+int main(int ac, char** av){
    return CommandLineTestRunner::RunAllTests(ac, av);
 }

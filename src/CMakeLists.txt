@@ -1,14 +1,17 @@
 project (Markdown-Manager)
 
 set(Headers
-    scanner.hpp;
+    scanner.hpp
+    Element.hpp
+    TextElement.hpp
 )
 
 set(CMAKE_BUILD_TYPE Debug)
 
 set(Sources
     app.cpp
-    scanner.cpp;
+    scanner.cpp
+    TextElement.cpp
 )
 
 include_directories(src)
