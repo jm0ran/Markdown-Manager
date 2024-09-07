@@ -1,9 +1,7 @@
 #include "TextElement.hpp"
 
-TextElement::TextElement(const std::string& text){
-    m_text = text;
-};
-    
+TextElement::TextElement(const std::string &text) { this->text = text; };
+
 std::string TextElement::render() const {
-    return m_text;
+  return "<span>" + this->text + "</span>";
 };

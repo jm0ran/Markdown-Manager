@@ -4,10 +4,10 @@
 
 class TextElement : public Element {
 public:
-    TextElement(const std::string& text);
+  TextElement(const std::string &text);
 
-    std::string render() const override;
+  std::string render() const override;
 
 private:
-    std::string m_text;
+  std::string text;
 };
