@@ -1,5 +1,5 @@
 #include "CppUTest/CommandLineTestRunner.h"
-#include "../src/scanner.hpp"
+#include "../src/include/Scanner.hpp"
 
 TEST_GROUP(HeaderTestGroup){
 

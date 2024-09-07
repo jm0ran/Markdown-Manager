@@ -1,6 +1,6 @@
 #include "HeaderElement.hpp"
 #include "TextElement.hpp"
-#include "scanner.hpp"
+#include "Scanner.hpp"
 #include <iostream>
 
 void log(std::string string) { std::cout << string << std::endl; }

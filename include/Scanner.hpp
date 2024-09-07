@@ -1,5 +1,4 @@
-#ifndef SCANNER_HPP
-#define SCANNER_HPP
+#pragma once
 
 #include <string>
 
@@ -25,5 +24,3 @@ private:
 
   // Methods
 };
-
-#endif // SCANNER_HPP
