@@ -5,6 +5,9 @@ set(Headers
     ../include/Element.hpp
     ../include/TextElement.hpp
     ../include/HeaderElement.hpp
+    ../include/BoldElement.hpp
+    ../include/ItalicElement.hpp
+    ../include/HighlightedElement.hpp
 )
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -14,6 +17,9 @@ set(Sources
     scanner.cpp 
     elements/TextElement.cpp 
     elements/HeaderElement.cpp
+    elements/BoldElement.cpp
+    elements/ItalicElement.cpp
+    elements/HighlightedElement.cpp
 )
 
 include_directories(src)
