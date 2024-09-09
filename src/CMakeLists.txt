@@ -14,7 +14,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(Sources
     app.cpp 
-    scanner.cpp 
+    Scanner.cpp 
     elements/TextElement.cpp 
     elements/HeaderElement.cpp
     elements/BoldElement.cpp

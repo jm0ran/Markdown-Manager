@@ -1,26 +1,23 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Scanner {
 public:
   // Variables
+  std::string filePath;
 
   // Methods
   Scanner(std::string filePath);
-  virtual ~Scanner() = default;
-
+  void readNextElement(std::string& line);
   void scan();
 
-  // Returns next line
-  std::string nextLine();
-
-  // Checks for headers on the passed line, handles h1-h6
-  int extractHeaders(std::string &line);
-
 private:
-  // Variables
-  std::string path;
-
   // Methods
+  bool extractHeader(std::string& line);
+  bool extractBold();
+  bool extractItalic();
+  bool extractStrikethrough();
+  bool extractText();
 };
