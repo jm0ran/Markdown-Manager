@@ -1,7 +1,10 @@
 #pragma once
 
+#include "Element.hpp"
+
 #include <string>
 #include <vector>
+
 
 class Scanner {
 public:
@@ -10,14 +13,14 @@ public:
 
   // Methods
   Scanner(std::string filePath);
-  void readNextElement(std::string& line);
+  std::shared_ptr<Element> readNextElement(std::string& line);
   void scan();
 
 private:
   // Methods
-  bool extractHeader(std::string& line);
+  std::shared_ptr<Element> extractHeader(std::string& line);
   bool extractBold();
   bool extractItalic();
   bool extractStrikethrough();
-  bool extractText();
+  std::shared_ptr<Element> extractText(std::string& line);
 };

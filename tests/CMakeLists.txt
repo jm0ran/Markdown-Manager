@@ -11,6 +11,7 @@ set_property(TARGET lib_cpputest PROPERTY
 set(Sources
     RunAllTests.cpp
     ElementTests.cpp
+    ScannerTests.cpp
 )
 
 # Create Test Executable and link it

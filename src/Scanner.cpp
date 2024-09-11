@@ -26,24 +26,28 @@ void Scanner::scan() {
   }
 }
 
-void Scanner::readNextElement(std::string& line) {
-  int left = 0;
-  int right = 0;
-  bool startFound = false;
-
-  extractHeader(line);
+std::shared_ptr<Element> Scanner::readNextElement(std::string& line) {
+  std::shared_ptr<Element> element = nullptr;
+  if((element = extractHeader(line))){
+    return element;
+  }else{
+    return extractText(line);
+  }
 }
 
-bool Scanner::extractHeader(std::string& line) {
+std::shared_ptr<Element> Scanner::extractHeader(std::string& line) {
   std::regex headerRegex("^#{1,6}\\ ");
   std::smatch match;
   if (std::regex_search(line, match, headerRegex)) {
     int headerLevel = match[0].length() - 1;
     std::string content = line.substr(match[0].length());
     HeaderElement header(headerLevel);
-    header.addChild(std::make_shared<TextElement>(TextElement(content)));
-    std::cout << header.render() << std::endl;
-    return true;
+    header.addChild(readNextElement(content));
+    return std::make_shared<HeaderElement>(header);
   }
-  return false;
+  return nullptr;
+}
+
+std::shared_ptr<Element> Scanner::extractText(std::string& line) {
+  return std::make_shared<TextElement>(TextElement(line));
 }
