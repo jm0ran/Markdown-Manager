@@ -18,8 +18,8 @@ public:
 private:
   // Methods
   std::shared_ptr<Element> extractHeader(std::string &line);
-  bool extractBold();
-  bool extractItalic();
-  bool extractStrikethrough();
+  std::shared_ptr<Element> extractBold(std::string &line);
+  std::shared_ptr<Element> extractItalic(std::string &line);
+  std::shared_ptr<Element> extractStrikethrough(std::string &line);
   std::shared_ptr<Element> extractText(std::string &line);
 };
