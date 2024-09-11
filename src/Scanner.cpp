@@ -22,20 +22,20 @@ void Scanner::scan() {
 
   std::string currentLine;
   while (std::getline(file, currentLine)) {
-      readNextElement(currentLine);
+    readNextElement(currentLine);
   }
 }
 
-std::shared_ptr<Element> Scanner::readNextElement(std::string& line) {
+std::shared_ptr<Element> Scanner::readNextElement(std::string &line) {
   std::shared_ptr<Element> element = nullptr;
-  if((element = extractHeader(line))){
+  if ((element = extractHeader(line))) {
     return element;
-  }else{
+  } else {
     return extractText(line);
   }
 }
 
-std::shared_ptr<Element> Scanner::extractHeader(std::string& line) {
+std::shared_ptr<Element> Scanner::extractHeader(std::string &line) {
   std::regex headerRegex("^#{1,6}\\ ");
   std::smatch match;
   if (std::regex_search(line, match, headerRegex)) {
@@ -48,6 +48,6 @@ std::shared_ptr<Element> Scanner::extractHeader(std::string& line) {
   return nullptr;
 }
 
-std::shared_ptr<Element> Scanner::extractText(std::string& line) {
+std::shared_ptr<Element> Scanner::extractText(std::string &line) {
   return std::make_shared<TextElement>(TextElement(line));
 }

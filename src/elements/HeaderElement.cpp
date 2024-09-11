@@ -2,8 +2,9 @@
 
 HeaderElement::HeaderElement(int level) {
   // Check if the level is between 1 and 6
-  if(level < 1 || level > 6){
-    throw std::invalid_argument("Header level must be between 1 and 6 inclusive");
+  if (level < 1 || level > 6) {
+    throw std::invalid_argument(
+        "Header level must be between 1 and 6 inclusive");
   }
 
   this->level = level;

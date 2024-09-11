@@ -22,6 +22,12 @@ set(Sources
     elements/HighlightedElement.cpp
 )
 
+# Format code with clang-format
+execute_process(
+    WORKING_DIRECTORY src/
+    COMMAND clang-format -i ${Sources} ${Headers}
+)
+
 include_directories(src)
 
 add_executable(${PROJECT_NAME} ${Headers} ${Sources})

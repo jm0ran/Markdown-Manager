@@ -4,7 +4,8 @@
 #include <vector>
 
 /**
- * Highlighted element class extends the Element class and represents a highlighted element in the markdown parser
+ * Highlighted element class extends the Element class and represents a
+ * highlighted element in the markdown parser
  */
 class HighlightedElement : public Element {
 public:
@@ -27,7 +28,8 @@ public:
 
 private:
   /**
-   * The children of the highlighted element stored as a vector of shared pointers to elements
+   * The children of the highlighted element stored as a vector of shared
+   * pointers to elements
    */
   std::vector<std::shared_ptr<Element>> children;
 };

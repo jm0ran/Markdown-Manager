@@ -4,7 +4,8 @@
 #include <vector>
 
 /**
- * Bold element class extends the Element class and represents a bold element in the markdown parser
+ * Bold element class extends the Element class and represents a bold element in
+ * the markdown parser
  */
 class BoldElement : public Element {
 public:

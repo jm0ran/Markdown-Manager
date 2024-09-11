@@ -4,7 +4,8 @@
 #include <vector>
 
 /**
- * Italic element class extends the Element class and represents a italic element in the markdown parser
+ * Italic element class extends the Element class and represents a italic
+ * element in the markdown parser
  */
 class ItalicElement : public Element {
 public:

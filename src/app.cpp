@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "HeaderElement.hpp"
-#include "TextElement.hpp"
 #include "Scanner.hpp"
+#include "TextElement.hpp"
 
 void log(std::string string) { std::cout << string << std::endl; }
 
@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]) {
   std::string elementName = "### This is a header";
   element = scanner.readNextElement(elementName);
 
-  if(element) {
+  if (element) {
     log("Element: " + element->render());
   }
 }

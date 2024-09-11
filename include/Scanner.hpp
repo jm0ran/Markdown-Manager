@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 
-
 class Scanner {
 public:
   // Variables
@@ -13,14 +12,14 @@ public:
 
   // Methods
   Scanner(std::string filePath);
-  std::shared_ptr<Element> readNextElement(std::string& line);
+  std::shared_ptr<Element> readNextElement(std::string &line);
   void scan();
 
 private:
   // Methods
-  std::shared_ptr<Element> extractHeader(std::string& line);
+  std::shared_ptr<Element> extractHeader(std::string &line);
   bool extractBold();
   bool extractItalic();
   bool extractStrikethrough();
-  std::shared_ptr<Element> extractText(std::string& line);
+  std::shared_ptr<Element> extractText(std::string &line);
 };

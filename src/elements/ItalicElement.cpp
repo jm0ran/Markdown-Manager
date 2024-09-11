@@ -13,4 +13,3 @@ std::string ItalicElement::render() const {
 void ItalicElement::addChild(std::shared_ptr<Element> child) {
   children.push_back(child);
 }
-
