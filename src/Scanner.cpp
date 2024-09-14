@@ -1,11 +1,10 @@
 #include "Scanner.hpp"
 #include "BoldElement.hpp"
 #include "HeaderElement.hpp"
+#include "ItalicElement.hpp"
 #include "LineElement.hpp"
 #include "TextElement.hpp"
 
-#include <fstream>
-#include <iostream>
 #include <regex>
 
 Scanner::Scanner(std::string filePath) { this->filePath = filePath; }
@@ -29,6 +28,8 @@ void Scanner::populateChildren(std::shared_ptr<Element> parent,
     if ((element = extractHeader(line))) {
       parent->addChild(element);
     } else if ((element = extractBold(line))) {
+      parent->addChild(element);
+    } else if ((element = extractItalic(line))) {
       parent->addChild(element);
     } else {
       parent->addChild(extractText(line));
@@ -64,6 +65,15 @@ std::shared_ptr<Element> Scanner::extractHeader(std::string &line) {
 std::shared_ptr<Element> Scanner::extractText(std::string &line) {
   if (line.empty()) {
     return nullptr;
+  }
+
+  std::regex textRegex("(.*?)(\\*\\*.*\\*\\*)");
+  std::smatch match;
+  if (std::regex_search(line, match, textRegex)) {
+    std::shared_ptr<TextElement> textElement =
+        std::make_shared<TextElement>(TextElement(match[1]));
+    line.erase(0, match[1].length());
+    return textElement;
   } else {
     std::shared_ptr<TextElement> textElement =
         std::make_shared<TextElement>(TextElement(line));
@@ -82,10 +92,29 @@ std::shared_ptr<Element> Scanner::extractBold(std::string &line) {
   if (std::regex_search(line, match, boldRegex)) {
     std::shared_ptr<BoldElement> boldElement =
         std::make_shared<BoldElement>(BoldElement());
-    std::string content = line.substr(2, line.length() - 4);
+    std::string content = line.substr(2, match[0].length() - 4);
     populateChildren(boldElement, content);
     line.erase(0, match[0].length());
     return boldElement;
+  }
+  return nullptr;
+}
+
+/**
+ * Extracts an italic element from the line if it exists
+ * @return a shared pointer to the italic element if it exists, otherwise
+ * nullptr
+ */
+std::shared_ptr<Element> Scanner::extractItalic(std::string &line) {
+  std::regex italicRegex("^\\*.*\\*");
+  std::smatch match;
+  if (std::regex_search(line, match, italicRegex)) {
+    std::shared_ptr<ItalicElement> italicElement =
+        std::make_shared<ItalicElement>(ItalicElement());
+    std::string content = line.substr(1, match[0].length() - 2);
+    populateChildren(italicElement, content);
+    line.erase(0, match[0].length());
+    return italicElement;
   }
   return nullptr;
 }
