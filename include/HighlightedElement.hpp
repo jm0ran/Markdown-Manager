@@ -24,7 +24,7 @@ public:
    * Add a child element to the highlighted element
    * @param child the child element to add
    */
-  void addChild(std::shared_ptr<Element> child);
+  void addChild(std::shared_ptr<Element> child) override;
 
 private:
   /**

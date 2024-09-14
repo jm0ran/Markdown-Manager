@@ -8,6 +8,7 @@ set(Headers
     ../include/BoldElement.hpp
     ../include/ItalicElement.hpp
     ../include/HighlightedElement.hpp
+    ../include/LineElement.hpp
 )
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -20,6 +21,7 @@ set(Sources
     elements/BoldElement.cpp
     elements/ItalicElement.cpp
     elements/HighlightedElement.cpp
+    elements/LineElement.cpp
 )
 
 # Format code with clang-format

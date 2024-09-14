@@ -21,20 +21,20 @@ TEST_GROUP(READ_NEXT_ELEMENT){
 };
 
 /** 
- * @brief Verify that the readNextElement can read a simple header element
+ * @brief Verify that the processLine can read a simple header element
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_000){
     std::string testLine = "# Header 1 Content";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<h1><span>Header 1 Content</span></h1>", element->render().c_str());
 };
 
 /**
- * @brief Verify that the readNextElement can read a simple text element
+ * @brief Verify that the processLine can read a simple text element
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_001){
     std::string testLine = "Text Element Content";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<span>Text Element Content</span>", element->render().c_str());
 };
 
@@ -43,7 +43,7 @@ TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_001){
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_002){
     std::string testLine = "####### Invalid Header Content";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<span>####### Invalid Header Content</span>", element->render().c_str());
 }
 
@@ -52,7 +52,7 @@ TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_002){
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_003){
     std::string testLine = "######Invalid Header Content";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<span>######Invalid Header Content</span>", element->render().c_str());
 }
 
@@ -61,7 +61,7 @@ TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_003){
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_004){
     std::string testLine = "BAD ###### Invalid Header Content";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<span>BAD ###### Invalid Header Content</span>", element->render().c_str());
 }
 
@@ -70,7 +70,7 @@ TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_004){
  */
 TEST(READ_NEXT_ELEMENT, READ_NEXT_ELEMENT_005){
     std::string testLine = "**Bold Element**";
-    std::shared_ptr<Element> element = scanner->readNextElement(testLine);
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<b><span>Bold Element</span></b>", element->render().c_str());
 }
 

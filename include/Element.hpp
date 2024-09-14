@@ -25,4 +25,12 @@ public:
    * @return std::string representation of the element
    */
   virtual std::string render() const = 0;
+
+  /**
+   * Add a child element to the current element, implemented by children of this
+   * class
+   * @param
+   * @return
+   */
+  virtual void addChild(std::shared_ptr<Element> child) = 0;
 };

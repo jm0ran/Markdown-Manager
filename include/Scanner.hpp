@@ -12,8 +12,10 @@ public:
 
   // Methods
   Scanner(std::string filePath);
-  std::shared_ptr<Element> readNextElement(std::string &line);
-  void scan();
+
+  void populateChildren(std::shared_ptr<Element> parent, std::string &line);
+
+  std::shared_ptr<Element> processLine(std::string &line);
 
 private:
   // Methods

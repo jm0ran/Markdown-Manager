@@ -1,6 +1,7 @@
 #include "Scanner.hpp"
 #include "BoldElement.hpp"
 #include "HeaderElement.hpp"
+#include "LineElement.hpp"
 #include "TextElement.hpp"
 
 #include <fstream>
@@ -9,76 +10,82 @@
 
 Scanner::Scanner(std::string filePath) { this->filePath = filePath; }
 
-void Scanner::scan() {
-  std::cout << "Scanning " << this->filePath << std::endl;
-  std::ifstream file;
-  file.open(this->filePath);
+std::shared_ptr<Element> Scanner::processLine(std::string &line) {
+  std::shared_ptr<LineElement> linePointer =
+      std::make_shared<LineElement>(LineElement());
+  this->populateChildren(linePointer, line);
+  return linePointer;
+}
 
-  if (!file) {
-    throw std::runtime_error("Could not open file: " + this->filePath);
-  }
-
-  std::string currentLine;
-  while (std::getline(file, currentLine)) {
-    readNextElement(currentLine);
+/**
+ * Populates the children of a parent element with the line
+ * @param parent the parent element to populate
+ * @param line the line to populate the parent element with
+ */
+void Scanner::populateChildren(std::shared_ptr<Element> parent,
+                               std::string &line) {
+  while (line.length() > 0) {
+    std::shared_ptr<Element> element = nullptr;
+    if ((element = extractHeader(line))) {
+      parent->addChild(element);
+    } else if ((element = extractBold(line))) {
+      parent->addChild(element);
+    } else {
+      parent->addChild(extractText(line));
+    }
   }
 }
 
-std::shared_ptr<Element> Scanner::readNextElement(std::string &line) {
-  std::shared_ptr<Element> element = nullptr;
-  if ((element = extractHeader(line))) {
-    return element;
-  } else if ((element = extractBold(line))) {
-    return element;
-  } else {
-    return extractText(line);
-  }
-}
-
+/**
+ * Extracts a header element from the line if it exists
+ * @return a shared pointer to the header element if it exists, otherwise
+ * nullptr
+ */
 std::shared_ptr<Element> Scanner::extractHeader(std::string &line) {
   std::regex headerRegex("^#{1,6}\\ ");
   std::smatch match;
   if (std::regex_search(line, match, headerRegex)) {
     int headerLevel = match[0].length() - 1;
-    HeaderElement header(headerLevel);
-    std::string content = line.substr(match[0].length());
-    std::shared_ptr<Element> nextElement = readNextElement(content);
-    if (nextElement) {
-      header.addChild(nextElement);
-    }
-    return std::make_shared<HeaderElement>(header);
+    std::shared_ptr<HeaderElement> header =
+        std::make_shared<HeaderElement>(HeaderElement(headerLevel));
+    std::string remaining = line.substr(match[0].length());
+    this->populateChildren(header, remaining);
+    line.erase(0, line.length());
+    return header;
   } else {
     return nullptr;
   }
 }
 
+/**
+ * Extracts a text element from the line if it exists
+ * @return a shared pointer to the text element if it exists, otherwise nullptr
+ */
 std::shared_ptr<Element> Scanner::extractText(std::string &line) {
   if (line.empty()) {
     return nullptr;
   } else {
-    // std::regex preTextRegex("^(.*?)(\\*\\*.*\\*\\*)");
-    // std::smatch match;
-    // if (std::regex_search(line, match, preTextRegex)) {
-    //   // trim text off of line
-    //   return nullptr;
-    //   // return std::make_shared<TextElement>(textElement);
-    // } else {
-    return std::make_shared<TextElement>(TextElement(line));
-    //}
+    std::shared_ptr<TextElement> textElement =
+        std::make_shared<TextElement>(TextElement(line));
+    line.erase(0, line.length());
+    return textElement;
   }
 }
 
+/**
+ * Extracts a bold element from the line if it exists
+ * @return a shared pointer to the bold element if it exists, otherwise nullptr
+ */
 std::shared_ptr<Element> Scanner::extractBold(std::string &line) {
   std::regex boldRegex("^\\*\\*.*\\*\\*");
   std::smatch match;
   if (std::regex_search(line, match, boldRegex)) {
-    BoldElement boldElement;
+    std::shared_ptr<BoldElement> boldElement =
+        std::make_shared<BoldElement>(BoldElement());
     std::string content = line.substr(2, line.length() - 4);
-    std::shared_ptr<Element> nextElement = readNextElement(content);
-    if (nextElement) {
-      boldElement.addChild(nextElement);
-    }
-    return std::make_shared<BoldElement>(boldElement);
+    populateChildren(boldElement, content);
+    line.erase(0, match[0].length());
+    return boldElement;
   }
   return nullptr;
 }

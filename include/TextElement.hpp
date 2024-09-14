@@ -4,9 +4,11 @@
 
 class TextElement : public Element {
 public:
-  TextElement(const std::string &text);
+  TextElement(const std::string text);
 
   std::string render() const override;
+
+  void addChild(std::shared_ptr<Element> child) override;
 
 private:
   std::string text;
