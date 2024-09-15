@@ -9,9 +9,9 @@ jobs:
       - run: sudo apt-get install -y gcc
       - run: sudo apt-get install -y cmake
       - run: sudo apt-get install -y cpputest
-      - run: mkdir /usr/CppUTest
-      - run: mkdir /usr/CppUTest/lib/
-      - run: cp -r /usr/include/CppUTest /usr/CppUTest/include
-      - run: cp /usr/lib/x86_64-linux-gnu/libCppUTest.a /usr/CppUTest/lib
-      - run: ls /usr/CppUTest/lib
+      - run: sudo mkdir /usr/CppUTest
+      - run: sudo mkdir /usr/CppUTest/lib/
+      - run: sudo cp -r /usr/include/CppUTest /usr/CppUTest/include
+      - run: sudo cp /usr/lib/x86_64-linux-gnu/libCppUTest.a /usr/CppUTest/lib
+      - run: sudo ls /usr/CppUTest/lib
 
