@@ -1,0 +1,17 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Unit-Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update 
+      - run: sudo apt-get install -y gcc
+      - run: sudo apt-get install -y cmake
+      - run: sudo apt-get install -y cpputest
+      - run: mkdir /usr/CppUTest
+      - run: mkdir /usr/CppUTest/lib/
+      - run: cp -r /usr/include/CppUTest /usr/CppUTest/include
+      - run: cp /usr/lib/x86_64-linux-gnu/libCppUTest.a /usr/CppUTest/lib
+      - run: ls /usr/CppUTest/lib
+
