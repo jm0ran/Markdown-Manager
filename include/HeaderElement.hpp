@@ -2,6 +2,7 @@
 
 #include "Element.hpp"
 #include <vector>
+#include <stdexcept>
 
 /**
  * Header element class extends the Element class and represents a header

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 /**
  * The Element class is the base class for all elements in the markdown parser,

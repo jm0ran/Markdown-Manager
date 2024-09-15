@@ -4,14 +4,40 @@ on: [push]
 jobs:
   Unit-Tests:
     runs-on: ubuntu-latest
+    env:
+      CPPUTEST_HOME: /usr/CppUTest
     steps:
-      - run: sudo apt-get update 
-      - run: sudo apt-get install -y gcc
-      - run: sudo apt-get install -y cmake
-      - run: sudo apt-get install -y cpputest
-      - run: sudo mkdir /usr/CppUTest
-      - run: sudo mkdir /usr/CppUTest/lib/
-      - run: sudo cp -r /usr/include/CppUTest /usr/CppUTest/include
-      - run: sudo cp /usr/lib/x86_64-linux-gnu/libCppUTest.a /usr/CppUTest/lib
-      - run: sudo ls /usr/CppUTest/lib
+      - name: Download Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake
+          sudo apt-get install -y cpputest
+
+      - name: Setup GCC
+        run: |
+          sudo apt-get install -y gcc
+          sudo apt-get install -y g++
+
+      - name: Configure CppUTest Structure
+        run: |
+          sudo mkdir /usr/CppUTest
+          sudo mkdir /usr/CppUTest/lib/
+          sudo cp -r /usr/include/CppUTest /usr/CppUTest/include
+          sudo cp /usr/lib/x86_64-linux-gnu/libCppUTest.a /usr/CppUTest/lib
+          sudo ls /usr/CppUTest/lib
+
+      - name: Clone the Repository
+        uses: actions/checkout@v3
+
+      - name: Build the Project
+        run: |
+          cmake -G "Unix Makefiles" -S ./ -B ./build/;
+          make -C ./build;
+
+      - name: Run Unit Tests
+        run: |
+          ./build/bin/TestRun
+
+
+        
 
