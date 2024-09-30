@@ -1,6 +1,7 @@
 #include "Scanner.hpp"
 #include "BoldElement.hpp"
 #include "HeaderElement.hpp"
+#include "HighlightedElement.hpp"
 #include "ItalicElement.hpp"
 #include "LineElement.hpp"
 #include "TextElement.hpp"
@@ -30,6 +31,8 @@ void Scanner::populateChildren(std::shared_ptr<Element> parent,
     } else if ((element = extractBold(line))) {
       parent->addChild(element);
     } else if ((element = extractItalic(line))) {
+      parent->addChild(element);
+    } else if ((element = extractHighlighted(line))) {
       parent->addChild(element);
     } else {
       parent->addChild(extractText(line));
@@ -67,7 +70,7 @@ std::shared_ptr<Element> Scanner::extractText(std::string &line) {
     return nullptr;
   }
 
-  std::regex textRegex("(.*?)(\\*\\*.*\\*\\*)");
+  std::regex textRegex("(.*?)(\\*\\*.*\\*\\*|\\*.*\\*|==.*==)");
   std::smatch match;
   if (std::regex_search(line, match, textRegex)) {
     std::shared_ptr<TextElement> textElement =
@@ -115,6 +118,25 @@ std::shared_ptr<Element> Scanner::extractItalic(std::string &line) {
     populateChildren(italicElement, content);
     line.erase(0, match[0].length());
     return italicElement;
+  }
+  return nullptr;
+}
+
+/**
+ * Extracts a highlighted element from the line if it exists
+ * @return a shared pointer to the highlighted element if it exists, otherwise
+ * nullptr
+ */
+std::shared_ptr<Element> Scanner::extractHighlighted(std::string &line) {
+  std::regex highlightRegex("^==.*==");
+  std::smatch match;
+  if (std::regex_search(line, match, highlightRegex)) {
+    std::shared_ptr<HighlightedElement> highlightedElement =
+        std::make_shared<HighlightedElement>(HighlightedElement());
+    std::string content = line.substr(2, match[0].length() - 4);
+    populateChildren(highlightedElement, content);
+    line.erase(0, match[0].length());
+    return highlightedElement;
   }
   return nullptr;
 }

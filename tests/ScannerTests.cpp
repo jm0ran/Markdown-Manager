@@ -100,3 +100,30 @@ TEST(PROCESS_LINE, ITALIC_ELEMENT_000){
     std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<i><span>Italic Element</span></i>", element->render().c_str());
 }
+
+/**
+ * @brief Verify that a line with regular text followed by an italic element renders as expected
+ */
+TEST(PROCESS_LINE, ITALIC_ELEMENT_001){
+    std::string testLine = "Regular Text *Italic Element*";
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
+    STRCMP_EQUAL("<span>Regular Text </span><i><span>Italic Element</span></i>", element->render().c_str());
+}
+
+/**
+ * @brief Verify that a line with just a highlighted element renders as expected
+ */
+TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_000){
+    std::string testLine = "==Highlighted Element==";
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
+    STRCMP_EQUAL("<mark><span>Highlighted Element</span></mark>", element->render().c_str());
+}
+
+/**
+ * @brief Verify that a line with regular text followed by a highlighted element renders as expected
+ */
+TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_001){
+    std::string testLine = "Regular Text ==Highlighted Element==";
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
+    STRCMP_EQUAL("<span>Regular Text </span><mark><span>Highlighted Element</span></mark>", element->render().c_str());
+}

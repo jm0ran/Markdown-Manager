@@ -22,6 +22,7 @@ private:
   std::shared_ptr<Element> extractHeader(std::string &line);
   std::shared_ptr<Element> extractBold(std::string &line);
   std::shared_ptr<Element> extractItalic(std::string &line);
+  std::shared_ptr<Element> extractHighlighted(std::string &line);
   std::shared_ptr<Element> extractStrikethrough(std::string &line);
   std::shared_ptr<Element> extractText(std::string &line);
 };

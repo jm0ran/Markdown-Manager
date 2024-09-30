@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Markdown Manager Unit Tests
+run-name: ${{ github.actor }} is running ${{ github.workflow }} on ${{ github.repository }}
 on: [push]
 jobs:
   Unit-Tests:
