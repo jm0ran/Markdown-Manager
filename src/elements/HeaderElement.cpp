@@ -1,5 +1,4 @@
 #include "HeaderElement.hpp"
-#include <stdexcept>
 
 HeaderElement::HeaderElement(int level) {
   // Check if the level is between 1 and 6
