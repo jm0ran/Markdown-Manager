@@ -127,3 +127,22 @@ TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_001){
     std::shared_ptr<Element> element = scanner->processLine(testLine);
     STRCMP_EQUAL("<span>Regular Text </span><mark><span>Highlighted Element</span></mark>", element->render().c_str());
 }
+
+/**
+ * @brief Verify that a line with just a strikethrough element renders as expected
+ */
+TEST(PROCESS_LINE, STRIKETHROUGH_ELEMENT_000){
+    std::string testLine = "~~Strikethrough Element~~";
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
+    STRCMP_EQUAL("<s><span>Strikethrough Element</span></s>", element->render().c_str());
+}
+
+/**
+ * @brief Verify that a line with regular text followed by a strikethrough element renders as expected
+ */
+
+TEST(PROCESS_LINE, STRIKETHROUGH_ELEMENT_001){
+    std::string testLine = "Regular Text ~~Strikethrough Element~~";
+    std::shared_ptr<Element> element = scanner->processLine(testLine);
+    STRCMP_EQUAL("<span>Regular Text </span><s><span>Strikethrough Element</span></s>", element->render().c_str());
+}

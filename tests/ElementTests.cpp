@@ -5,6 +5,7 @@
 #include "BoldElement.hpp"
 #include "ItalicElement.hpp"
 #include "HighlightedElement.hpp"
+#include "StrikethroughElement.hpp"
 
 /**
  * @brief Test Group specific to the textElement class
@@ -39,6 +40,13 @@ TEST_GROUP(ITALIC_ELEMENT){
  */
 TEST_GROUP(HIGHLIGHTED_ELEMENT){
 
+};
+
+/**
+ * @brief Test Group specific to the strikethroughElement class
+ */
+TEST_GROUP(STRIKETHROUGH_ELEMENT){
+   
 };
 
 /**
@@ -129,3 +137,21 @@ TEST(HIGHLIGHTED_ELEMENT, HIGHLIGHTED_ELEMENT_001){
    highlightedElement.addChild(std::make_shared<TextElement>("HighlightedElement Content"));
    STRCMP_EQUAL("<mark><span>HighlightedElement Content</span></mark>", highlightedElement.render().c_str());
 };
+
+/**
+ * @brief Verify that a strike through element renders as expected with no children
+ */
+TEST(STRIKETHROUGH_ELEMENT, STRIKETHROUGH_ELEMENT_000){
+   StrikethroughElement strikethroughElement;
+   STRCMP_EQUAL("<s></s>", strikethroughElement.render().c_str());
+};
+
+/**
+ * @brief Verify that a strike through element with a child text element renders as expected
+ */
+TEST(STRIKETHROUGH_ELEMENT, STRIKETHROUGH_ELEMENT_001){
+   StrikethroughElement strikethroughElement;
+   strikethroughElement.addChild(std::make_shared<TextElement>("StrikethroughElement Content"));
+   STRCMP_EQUAL("<s><span>StrikethroughElement Content</span></s>", strikethroughElement.render().c_str());
+};
+

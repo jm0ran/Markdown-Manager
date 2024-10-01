@@ -4,6 +4,7 @@
 #include "HighlightedElement.hpp"
 #include "ItalicElement.hpp"
 #include "LineElement.hpp"
+#include "StrikethroughElement.hpp"
 #include "TextElement.hpp"
 
 #include <regex>
@@ -33,6 +34,8 @@ void Scanner::populateChildren(std::shared_ptr<Element> parent,
     } else if ((element = extractItalic(line))) {
       parent->addChild(element);
     } else if ((element = extractHighlighted(line))) {
+      parent->addChild(element);
+    } else if ((element = extractStrikethrough(line))) {
       parent->addChild(element);
     } else {
       parent->addChild(extractText(line));
@@ -70,7 +73,7 @@ std::shared_ptr<Element> Scanner::extractText(std::string &line) {
     return nullptr;
   }
 
-  std::regex textRegex("(.*?)(\\*\\*.*\\*\\*|\\*.*\\*|==.*==)");
+  std::regex textRegex("(.*?)(\\*\\*.*\\*\\*|\\*.*\\*|==.*==|~~.*~~)");
   std::smatch match;
   if (std::regex_search(line, match, textRegex)) {
     std::shared_ptr<TextElement> textElement =
@@ -137,6 +140,25 @@ std::shared_ptr<Element> Scanner::extractHighlighted(std::string &line) {
     populateChildren(highlightedElement, content);
     line.erase(0, match[0].length());
     return highlightedElement;
+  }
+  return nullptr;
+}
+
+/**
+ * Extracts a strikethrough element from the line if it exists
+ * @return a shared pointer to the strikethrough element if it exists, otherwise
+ * nullptr
+ */
+std::shared_ptr<Element> Scanner::extractStrikethrough(std::string &line) {
+  std::regex strikethroughRegex("^~~.*~~");
+  std::smatch match;
+  if (std::regex_search(line, match, strikethroughRegex)) {
+    std::shared_ptr<StrikethroughElement> strikethroughElement =
+        std::make_shared<StrikethroughElement>(StrikethroughElement());
+    std::string content = line.substr(2, match[0].length() - 4);
+    populateChildren(strikethroughElement, content);
+    line.erase(0, match[0].length());
+    return strikethroughElement;
   }
   return nullptr;
 }

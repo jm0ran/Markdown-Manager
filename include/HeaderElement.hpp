@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Element.hpp"
-#include <stdexcept>
 #include <vector>
 
 /**
@@ -47,4 +46,3 @@ private:
    */
   std::vector<std::shared_ptr<Element>> children;
 };
-;

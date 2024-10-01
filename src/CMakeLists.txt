@@ -8,6 +8,7 @@ set(Headers
     ../include/BoldElement.hpp
     ../include/ItalicElement.hpp
     ../include/HighlightedElement.hpp
+    ../include/StrikethroughElement.hpp
     ../include/LineElement.hpp
 )
 
@@ -21,6 +22,7 @@ set(Sources
     elements/BoldElement.cpp
     elements/ItalicElement.cpp
     elements/HighlightedElement.cpp
+    elements/StrikethroughElement.cpp
     elements/LineElement.cpp
 )
 
