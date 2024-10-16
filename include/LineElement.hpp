@@ -10,7 +10,7 @@
 class LineElement : public Element {
 public:
   LineElement();
-  std::string render() const override;
+  std::string render(RenderInterface &renderer) const override;
   void addChild(std::shared_ptr<Element> child) override;
 
 private:

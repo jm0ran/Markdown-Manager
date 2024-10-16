@@ -1,6 +1,7 @@
 #include "CppUTest/CommandLineTestRunner.h"
 
 #include "Scanner.hpp"
+#include "HTMLRenderer.hpp"
 
 /**
  * Variables to be used across tests
@@ -26,7 +27,8 @@ TEST_GROUP(PROCESS_LINE){
 TEST(PROCESS_LINE, TEXT_ELEMENT_000){
     std::string testLine = "Text Element Content";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>Text Element Content</span>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>Text Element Content</span>", element->render(renderer).c_str());
 };
 
 /** 
@@ -35,7 +37,8 @@ TEST(PROCESS_LINE, TEXT_ELEMENT_000){
 TEST(PROCESS_LINE, HEADER_ELEMENT_000){
     std::string testLine = "# Header 1 Content";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<h1><span>Header 1 Content</span></h1>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<h1><span>Header 1 Content</span></h1>", element->render(renderer).c_str());
 };
 
 /**
@@ -44,7 +47,8 @@ TEST(PROCESS_LINE, HEADER_ELEMENT_000){
 TEST(PROCESS_LINE, HEADER_ELEMENT_001){
     std::string testLine = "####### Invalid Header Content";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>####### Invalid Header Content</span>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>####### Invalid Header Content</span>", element->render(renderer).c_str());
 }
 
 /**
@@ -53,7 +57,8 @@ TEST(PROCESS_LINE, HEADER_ELEMENT_001){
 TEST(PROCESS_LINE, HEADER_ELEMENT_002){
     std::string testLine = "######Invalid Header Content";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>######Invalid Header Content</span>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>######Invalid Header Content</span>", element->render(renderer).c_str());
 }
 
 /**
@@ -62,7 +67,8 @@ TEST(PROCESS_LINE, HEADER_ELEMENT_002){
 TEST(PROCESS_LINE, HEADER_ELEMENT_003){
     std::string testLine = "BAD ###### Invalid Header Content";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>BAD ###### Invalid Header Content</span>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>BAD ###### Invalid Header Content</span>", element->render(renderer).c_str());
 }
 
 /**
@@ -71,7 +77,8 @@ TEST(PROCESS_LINE, HEADER_ELEMENT_003){
 TEST(PROCESS_LINE, BOLD_ELEMENT_000){
     std::string testLine = "**Bold Element**";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<b><span>Bold Element</span></b>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<b><span>Bold Element</span></b>", element->render(renderer).c_str());
 }
 
 /**
@@ -80,7 +87,8 @@ TEST(PROCESS_LINE, BOLD_ELEMENT_000){
 TEST(PROCESS_LINE, BOLD_ELEMENT_001){
     std::string testLine = "Regular Text **Bold Element**";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>Regular Text </span><b><span>Bold Element</span></b>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>Regular Text </span><b><span>Bold Element</span></b>", element->render(renderer).c_str());
 }
 
 /**
@@ -89,7 +97,8 @@ TEST(PROCESS_LINE, BOLD_ELEMENT_001){
 TEST(PROCESS_LINE, BOLD_ELEMENT_002){
     std::string testLine = "**Bold Element** Regular Text";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<b><span>Bold Element</span></b><span> Regular Text</span>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<b><span>Bold Element</span></b><span> Regular Text</span>", element->render(renderer).c_str());
 }
 
 /**
@@ -98,7 +107,8 @@ TEST(PROCESS_LINE, BOLD_ELEMENT_002){
 TEST(PROCESS_LINE, ITALIC_ELEMENT_000){
     std::string testLine = "*Italic Element*";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<i><span>Italic Element</span></i>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<i><span>Italic Element</span></i>", element->render(renderer).c_str());
 }
 
 /**
@@ -107,7 +117,8 @@ TEST(PROCESS_LINE, ITALIC_ELEMENT_000){
 TEST(PROCESS_LINE, ITALIC_ELEMENT_001){
     std::string testLine = "Regular Text *Italic Element*";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>Regular Text </span><i><span>Italic Element</span></i>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>Regular Text </span><i><span>Italic Element</span></i>", element->render(renderer).c_str());
 }
 
 /**
@@ -116,7 +127,8 @@ TEST(PROCESS_LINE, ITALIC_ELEMENT_001){
 TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_000){
     std::string testLine = "==Highlighted Element==";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<mark><span>Highlighted Element</span></mark>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<mark><span>Highlighted Element</span></mark>", element->render(renderer).c_str());
 }
 
 /**
@@ -125,7 +137,8 @@ TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_000){
 TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_001){
     std::string testLine = "Regular Text ==Highlighted Element==";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>Regular Text </span><mark><span>Highlighted Element</span></mark>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>Regular Text </span><mark><span>Highlighted Element</span></mark>", element->render(renderer).c_str());
 }
 
 /**
@@ -134,7 +147,8 @@ TEST(PROCESS_LINE, HIGHLIGHTED_ELEMENT_001){
 TEST(PROCESS_LINE, STRIKETHROUGH_ELEMENT_000){
     std::string testLine = "~~Strikethrough Element~~";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<s><span>Strikethrough Element</span></s>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<s><span>Strikethrough Element</span></s>", element->render(renderer).c_str());
 }
 
 /**
@@ -144,5 +158,6 @@ TEST(PROCESS_LINE, STRIKETHROUGH_ELEMENT_000){
 TEST(PROCESS_LINE, STRIKETHROUGH_ELEMENT_001){
     std::string testLine = "Regular Text ~~Strikethrough Element~~";
     std::shared_ptr<Element> element = scanner->processLine(testLine);
-    STRCMP_EQUAL("<span>Regular Text </span><s><span>Strikethrough Element</span></s>", element->render().c_str());
+    HTMLRenderer renderer;
+    STRCMP_EQUAL("<span>Regular Text </span><s><span>Strikethrough Element</span></s>", element->render(renderer).c_str());
 }

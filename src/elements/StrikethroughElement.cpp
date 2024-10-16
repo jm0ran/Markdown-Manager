@@ -2,10 +2,10 @@
 
 StrikethroughElement::StrikethroughElement() {}
 
-std::string StrikethroughElement::render() const {
+std::string StrikethroughElement::render(RenderInterface &renderer) const {
   std::string renderedChildren;
   for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render();
+    renderedChildren += child->render(renderer);
   }
   return "<s>" + renderedChildren + "</s>";
 }

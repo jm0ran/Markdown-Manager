@@ -3,7 +3,7 @@
 
 TextElement::TextElement(const std::string text) { this->text = text; };
 
-std::string TextElement::render() const {
+std::string TextElement::render(RenderInterface &renderer) const {
   return "<span>" + this->text + "</span>";
 };
 

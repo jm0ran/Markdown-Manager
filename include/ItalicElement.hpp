@@ -16,9 +16,11 @@ public:
 
   /**
    * Render the italic element to a string value
+   * @param renderer the renderer object used to render this element and all
+   * children
    * @return std::string representation of the italic element
    */
-  std::string render() const override;
+  std::string render(RenderInterface &renderer) const override;
 
   /**
    * Add a child element to the italic element

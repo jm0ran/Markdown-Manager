@@ -2,10 +2,10 @@
 
 BoldElement::BoldElement() {}
 
-std::string BoldElement::render() const {
+std::string BoldElement::render(RenderInterface &renderer) const {
   std::string renderedChildren;
   for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render();
+    renderedChildren += child->render(renderer);
   }
   return "<b>" + renderedChildren + "</b>";
 }

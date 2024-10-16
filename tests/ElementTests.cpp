@@ -7,6 +7,8 @@
 #include "HighlightedElement.hpp"
 #include "StrikethroughElement.hpp"
 
+#include "HTMLRenderer.hpp"
+
 /**
  * @brief Test Group specific to the textElement class
  */
@@ -54,7 +56,8 @@ TEST_GROUP(STRIKETHROUGH_ELEMENT){
  */
 TEST(TEXT_ELEMENT, TEXT_ELEMENT_000){
    TextElement textElement("TextElement Content");
-   STRCMP_EQUAL("<span>TextElement Content</span>", textElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<span>TextElement Content</span>", textElement.render(renderer).c_str());
 };
 
 /**
@@ -62,7 +65,8 @@ TEST(TEXT_ELEMENT, TEXT_ELEMENT_000){
  */
 TEST(HEADER_ELEMENT, HEADER_ELEMENT_000){
    HeaderElement headerElement(1);
-   STRCMP_EQUAL("<h1></h1>", headerElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<h1></h1>", headerElement.render(renderer).c_str());
 };
 
 /**
@@ -70,7 +74,8 @@ TEST(HEADER_ELEMENT, HEADER_ELEMENT_000){
  */
 TEST(HEADER_ELEMENT, HEADER_ELEMENT_001){
    HeaderElement headerElement(3);
-   STRCMP_EQUAL("<h3></h3>", headerElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<h3></h3>", headerElement.render(renderer).c_str());
 };
 
 /**
@@ -92,7 +97,8 @@ TEST(HEADER_ELEMENT, HEADER_ELEMENT_003){
  */
 TEST(BOLD_ELEMENT, BOLD_ELEMENT_000){
    BoldElement boldElement;
-   STRCMP_EQUAL("<b></b>", boldElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<b></b>", boldElement.render(renderer).c_str());
 };
 
 /**
@@ -101,7 +107,8 @@ TEST(BOLD_ELEMENT, BOLD_ELEMENT_000){
 TEST(BOLD_ELEMENT, BOLD_ELEMENT_001){
    BoldElement boldElement;
    boldElement.addChild(std::make_shared<TextElement>("BoldElement Content"));
-   STRCMP_EQUAL("<b><span>BoldElement Content</span></b>", boldElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<b><span>BoldElement Content</span></b>", boldElement.render(renderer).c_str());
 };
 
 /**
@@ -109,7 +116,8 @@ TEST(BOLD_ELEMENT, BOLD_ELEMENT_001){
  */
 TEST(ITALIC_ELEMENT, ITALIC_ELEMENT_000){
    ItalicElement italicElement;
-   STRCMP_EQUAL("<i></i>", italicElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<i></i>", italicElement.render(renderer).c_str());
 };
 
 /**
@@ -118,7 +126,8 @@ TEST(ITALIC_ELEMENT, ITALIC_ELEMENT_000){
 TEST(ITALIC_ELEMENT, ITALIC_ELEMENT_001){
    ItalicElement italicElement;
    italicElement.addChild(std::make_shared<TextElement>("ItalicElement Content"));
-   STRCMP_EQUAL("<i><span>ItalicElement Content</span></i>", italicElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<i><span>ItalicElement Content</span></i>", italicElement.render(renderer).c_str());
 };
 
 /**
@@ -126,7 +135,8 @@ TEST(ITALIC_ELEMENT, ITALIC_ELEMENT_001){
  */
 TEST(HIGHLIGHTED_ELEMENT, HIGHLIGHTED_ELEMENT_000){
    HighlightedElement highlightedElement;
-   STRCMP_EQUAL("<mark></mark>", highlightedElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<mark></mark>", highlightedElement.render(renderer).c_str());
 };
 
 /**
@@ -135,7 +145,8 @@ TEST(HIGHLIGHTED_ELEMENT, HIGHLIGHTED_ELEMENT_000){
 TEST(HIGHLIGHTED_ELEMENT, HIGHLIGHTED_ELEMENT_001){
    HighlightedElement highlightedElement;
    highlightedElement.addChild(std::make_shared<TextElement>("HighlightedElement Content"));
-   STRCMP_EQUAL("<mark><span>HighlightedElement Content</span></mark>", highlightedElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<mark><span>HighlightedElement Content</span></mark>", highlightedElement.render(renderer).c_str());
 };
 
 /**
@@ -143,7 +154,8 @@ TEST(HIGHLIGHTED_ELEMENT, HIGHLIGHTED_ELEMENT_001){
  */
 TEST(STRIKETHROUGH_ELEMENT, STRIKETHROUGH_ELEMENT_000){
    StrikethroughElement strikethroughElement;
-   STRCMP_EQUAL("<s></s>", strikethroughElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<s></s>", strikethroughElement.render(renderer).c_str());
 };
 
 /**
@@ -152,6 +164,7 @@ TEST(STRIKETHROUGH_ELEMENT, STRIKETHROUGH_ELEMENT_000){
 TEST(STRIKETHROUGH_ELEMENT, STRIKETHROUGH_ELEMENT_001){
    StrikethroughElement strikethroughElement;
    strikethroughElement.addChild(std::make_shared<TextElement>("StrikethroughElement Content"));
-   STRCMP_EQUAL("<s><span>StrikethroughElement Content</span></s>", strikethroughElement.render().c_str());
+   HTMLRenderer renderer;
+   STRCMP_EQUAL("<s><span>StrikethroughElement Content</span></s>", strikethroughElement.render(renderer).c_str());
 };
 

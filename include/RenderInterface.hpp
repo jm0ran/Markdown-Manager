@@ -2,11 +2,12 @@
 
 #include <string>
 
-#include "BoldElement.hpp"
-#include "HighlightedElement.hpp"
-#include "ItalicElement.hpp"
-#include "StrikethroughElement.hpp"
-#include "TextElement.hpp"
+// Forward declarations
+class BoldElement;
+class HighlightedElement;
+class ItalicElement;
+class StrikethroughElement;
+class TextElement;
 
 /**
  * The RenderInterface class is an interface for rendering elements in the

@@ -16,9 +16,11 @@ public:
 
   /**
    * Render the highlighted element to a string value
+   * @param renderer the renderer object used to render this element and all
+   * children
    * @return std::string representation of the highlighted element
    */
-  std::string render() const override;
+  std::string render(RenderInterface &renderer) const override;
 
   /**
    * Add a child element to the highlighted element

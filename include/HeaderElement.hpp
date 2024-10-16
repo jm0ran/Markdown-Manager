@@ -20,8 +20,10 @@ public:
   /**
    * Render the header element to a string value
    * @return std::string representation of the header element
+   * @param renderer the renderer object used to render this element and all
+   * children
    */
-  std::string render() const override;
+  std::string render(RenderInterface &renderer) const override;
 
   /**
    * Get the level of the header element

@@ -2,10 +2,10 @@
 
 ItalicElement::ItalicElement() {}
 
-std::string ItalicElement::render() const {
+std::string ItalicElement::render(RenderInterface &renderer) const {
   std::string renderedChildren;
   for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render();
+    renderedChildren += child->render(renderer);
   }
   return "<i>" + renderedChildren + "</i>";
 }

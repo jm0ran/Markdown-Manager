@@ -17,8 +17,10 @@ public:
   /**
    * Render the bold element to a string value
    * @return std::string representation of the bold element
+   * @param renderer the renderer object used to render this element and all
+   * children
    */
-  std::string render() const override;
+  std::string render(RenderInterface &renderer) const override;
 
   /**
    * Add a child element to the bold element

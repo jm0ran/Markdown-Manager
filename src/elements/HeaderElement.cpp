@@ -10,10 +10,10 @@ HeaderElement::HeaderElement(int level) {
   this->level = level;
 }
 
-std::string HeaderElement::render() const {
+std::string HeaderElement::render(RenderInterface &renderer) const {
   std::string renderedChildren;
   for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render();
+    renderedChildren += child->render(renderer);
   }
   return "<h" + std::to_string(level) + ">" + renderedChildren + "</h" +
          std::to_string(level) + ">";

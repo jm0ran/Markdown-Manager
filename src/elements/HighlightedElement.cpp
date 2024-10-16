@@ -2,10 +2,10 @@
 
 HighlightedElement::HighlightedElement() {}
 
-std::string HighlightedElement::render() const {
+std::string HighlightedElement::render(RenderInterface &renderer) const {
   std::string renderedChildren;
   for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render();
+    renderedChildren += child->render(renderer);
   }
   return "<mark>" + renderedChildren + "</mark>";
 }
