@@ -26,6 +26,7 @@ set(Sources
     elements/HighlightedElement.cpp
     elements/StrikethroughElement.cpp
     elements/LineElement.cpp
+    elements/Element.cpp
     renderers/HTMLRenderer.cpp
 )
 

@@ -28,6 +28,13 @@ public:
    */
   void addChild(std::shared_ptr<Element> child) override;
 
+  /**
+   * Get the children of the bold element
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the vector of
+   * children
+   */
+  const std::vector<std::shared_ptr<Element>> &getChildren() const override;
+
 private:
   /**
    * The children of the bold element stores as a vector of shared pointers to

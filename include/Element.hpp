@@ -35,7 +35,15 @@ public:
    * Add a child element to the current element, implemented by children of this
    * class
    * @param child the child element to add
-   * @return
+   * @return void
    */
   virtual void addChild(std::shared_ptr<Element> child) = 0;
+
+  /**
+   * Gets a reference to the vector of children that this element has, to be
+   * used by renderer classes
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the vector of
+   * children
+   */
+  virtual const std::vector<std::shared_ptr<Element>> &getChildren() const;
 };

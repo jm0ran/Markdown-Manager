@@ -10,7 +10,7 @@ class HTMLRenderer : public RenderInterface {
   /**
    * Render bold element to HTML
    */
-  std::string renderBoldElement(BoldElement &element) override;
+  std::string renderBoldElement(const BoldElement &element) override;
 
   /**
    * Render italic element to HTML

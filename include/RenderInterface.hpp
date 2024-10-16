@@ -23,9 +23,9 @@ public:
 
   /**
    * Renders the given bold element to a string value
-   * @param element the bold element to render
+   * @param element the bold element to render, const
    */
-  virtual std::string renderBoldElement(BoldElement &element) = 0;
+  virtual std::string renderBoldElement(const BoldElement &element) = 0;
 
   /**
    * Renders the given italic element to a string value
