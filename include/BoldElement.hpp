@@ -30,8 +30,8 @@ public:
 
   /**
    * Get the children of the bold element
-   * @return const std::vector<std::shared_ptr<Element>>& reference to the vector of
-   * children
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the
+   * vector of children
    */
   const std::vector<std::shared_ptr<Element>> &getChildren() const override;
 

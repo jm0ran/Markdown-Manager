@@ -1,3 +1,6 @@
+# Run tests locally before pushing by starting your docker engine and executing the following act command
+# act --container-architecture linux/amd64 -j "Unit-Tests"
+
 name: Markdown Manager Unit Tests
 run-name: ${{ github.actor }} is running ${{ github.workflow }} on ${{ github.repository }}
 on: [push]

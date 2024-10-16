@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "RenderInterface.hpp"
 
@@ -42,8 +43,8 @@ public:
   /**
    * Gets a reference to the vector of children that this element has, to be
    * used by renderer classes
-   * @return const std::vector<std::shared_ptr<Element>>& reference to the vector of
-   * children
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the
+   * vector of children
    */
   virtual const std::vector<std::shared_ptr<Element>> &getChildren() const;
 };
