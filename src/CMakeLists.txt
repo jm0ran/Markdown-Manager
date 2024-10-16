@@ -10,6 +10,8 @@ set(Headers
     ../include/HighlightedElement.hpp
     ../include/StrikethroughElement.hpp
     ../include/LineElement.hpp
+    ../include/RenderInterface.hpp
+    ../include/HTMLRenderer.hpp
 )
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -24,6 +26,7 @@ set(Sources
     elements/HighlightedElement.cpp
     elements/StrikethroughElement.cpp
     elements/LineElement.cpp
+    renderers/HTMLRenderer.cpp
 )
 
 # Format code with clang-format
