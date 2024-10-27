@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Element.hpp"
 #include <stdexcept>
 #include <vector>
+
+#include "Element.hpp"
 
 /**
  * Header element class extends the Element class and represents a header
@@ -44,8 +45,8 @@ private:
   int level;
 
   /**
-   * The children of the header element stores as a vector of shared pointers to
-   * elements
+   * The children of the header element stores as a vector of shared pointers
+   * to elements
    */
   std::vector<std::shared_ptr<Element>> children;
 };

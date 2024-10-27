@@ -3,13 +3,14 @@
 HighlightedElement::HighlightedElement() {}
 
 std::string HighlightedElement::render(RenderInterface &renderer) const {
-  std::string renderedChildren;
-  for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render(renderer);
-  }
-  return "<mark>" + renderedChildren + "</mark>";
+  return renderer.renderHighlightedElement(*this);
 }
 
 void HighlightedElement::addChild(std::shared_ptr<Element> child) {
   children.push_back(child);
+}
+
+const std::vector<std::shared_ptr<Element>> &
+HighlightedElement::getChildren() const {
+  return children;
 }

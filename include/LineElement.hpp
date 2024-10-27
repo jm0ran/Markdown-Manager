@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Element.hpp"
 #include <vector>
+
+#include "Element.hpp"
 
 /**
  * Highest level element of organization in the parser as information is parsed

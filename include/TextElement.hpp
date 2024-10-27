@@ -10,6 +10,8 @@ public:
 
   void addChild(std::shared_ptr<Element> child) override;
 
+  std::string getText() const;
+
 private:
   std::string text;
 };

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Element.hpp"
-
 #include <string>
 #include <vector>
+
+#include "Element.hpp"
 
 class Scanner {
 public:

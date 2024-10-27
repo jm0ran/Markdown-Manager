@@ -1,4 +1,5 @@
 #include "LineElement.hpp"
+
 #include <iostream>
 
 LineElement::LineElement() {}

@@ -13,3 +13,8 @@ std::string StrikethroughElement::render(RenderInterface &renderer) const {
 void StrikethroughElement::addChild(std::shared_ptr<Element> child) {
   children.push_back(child);
 }
+
+const std::vector<std::shared_ptr<Element>> &
+StrikethroughElement::getChildren() const {
+  return children;
+}

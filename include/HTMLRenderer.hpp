@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
 #include "RenderInterface.hpp"
 
 /**
@@ -7,6 +10,7 @@
  * output them in an HTML compliant format
  */
 class HTMLRenderer : public RenderInterface {
+public:
   /**
    * Render bold element to HTML
    */
@@ -15,21 +19,26 @@ class HTMLRenderer : public RenderInterface {
   /**
    * Render italic element to HTML
    */
-  std::string renderItalicElement(ItalicElement &element) override;
+  std::string renderItalicElement(const ItalicElement &element) override;
 
   /**
    * Render highlighted element to HTML
    */
-  std::string renderHighlightedElement(HighlightedElement &element) override;
+  std::string
+  renderHighlightedElement(const HighlightedElement &element) override;
 
   /**
    * Render strike-through element to HTML
    */
   std::string
-  renderStrikethroughElement(StrikethroughElement &element) override;
+  renderStrikethroughElement(const StrikethroughElement &element) override;
 
   /**
    * Render text element to HTML
    */
-  std::string renderTextElement(TextElement &element) override;
+  std::string renderTextElement(const TextElement &element) override;
+
+private:
+  std::string
+  renderChildrenGeneric(const std::vector<std::shared_ptr<Element>> &children);
 };

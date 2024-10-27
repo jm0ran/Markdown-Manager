@@ -1,4 +1,7 @@
 #include "Scanner.hpp"
+
+#include <regex>
+
 #include "BoldElement.hpp"
 #include "HeaderElement.hpp"
 #include "HighlightedElement.hpp"
@@ -6,8 +9,6 @@
 #include "LineElement.hpp"
 #include "StrikethroughElement.hpp"
 #include "TextElement.hpp"
-
-#include <regex>
 
 Scanner::Scanner(std::string filePath) { this->filePath = filePath; }
 
@@ -146,8 +147,8 @@ std::shared_ptr<Element> Scanner::extractHighlighted(std::string &line) {
 
 /**
  * Extracts a strikethrough element from the line if it exists
- * @return a shared pointer to the strikethrough element if it exists, otherwise
- * nullptr
+ * @return a shared pointer to the strikethrough element if it exists,
+ * otherwise nullptr
  */
 std::shared_ptr<Element> Scanner::extractStrikethrough(std::string &line) {
   std::regex strikethroughRegex("^~~.*~~");

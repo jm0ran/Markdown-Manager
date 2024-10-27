@@ -1,4 +1,5 @@
 #include "Element.hpp"
+
 #include <stdexcept>
 
 const std::vector<std::shared_ptr<Element>> &Element::getChildren() const {

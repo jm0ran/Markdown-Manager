@@ -3,13 +3,14 @@
 ItalicElement::ItalicElement() {}
 
 std::string ItalicElement::render(RenderInterface &renderer) const {
-  std::string renderedChildren;
-  for (const std::shared_ptr<Element> &child : children) {
-    renderedChildren += child->render(renderer);
-  }
-  return "<i>" + renderedChildren + "</i>";
+  return renderer.renderItalicElement(*this);
 }
 
 void ItalicElement::addChild(std::shared_ptr<Element> child) {
   children.push_back(child);
+}
+
+const std::vector<std::shared_ptr<Element>> &
+ItalicElement::getChildren() const {
+  return children;
 }

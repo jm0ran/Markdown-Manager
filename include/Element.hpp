@@ -24,8 +24,8 @@ public:
   virtual ~Element() = default;
 
   /**
-   * Render the given element to a string value, implemented by children of this
-   * class
+   * Render the given element to a string value, implemented by children of
+   * this class
    * @param renderer the renderer object used to render this element and all
    * children
    * @return std::string representation of the element
@@ -33,8 +33,8 @@ public:
   virtual std::string render(RenderInterface &renderer) const = 0;
 
   /**
-   * Add a child element to the current element, implemented by children of this
-   * class
+   * Add a child element to the current element, implemented by children of
+   * this class
    * @param child the child element to add
    * @return void
    */

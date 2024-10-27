@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Element.hpp"
 #include <vector>
+
+#include "Element.hpp"
 
 /**
  * Italic element class extends the Element class and represents a italic
@@ -28,10 +29,17 @@ public:
    */
   void addChild(std::shared_ptr<Element> child) override;
 
+  /**
+   * Get the children of the bold element
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the
+   * vector of children
+   */
+  const std::vector<std::shared_ptr<Element>> &getChildren() const override;
+
 private:
   /**
-   * The children of the italic element stores as a vector of shared pointers to
-   * elements
+   * The children of the italic element stores as a vector of shared pointers
+   * to elements
    */
   std::vector<std::shared_ptr<Element>> children;
 };

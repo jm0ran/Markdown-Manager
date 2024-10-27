@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Element.hpp"
 #include <vector>
+
+#include "Element.hpp"
 
 /**
  * Highlighted element class extends the Element class and represents a
@@ -27,6 +28,13 @@ public:
    * @param child the child element to add
    */
   void addChild(std::shared_ptr<Element> child) override;
+
+  /**
+   * Get the children of the highlighted element
+   * @return const std::vector<std::shared_ptr<Element>>& reference to the
+   * vector of children
+   */
+  const std::vector<std::shared_ptr<Element>> &getChildren() const override;
 
 private:
   /**
