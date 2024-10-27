@@ -39,6 +39,10 @@ public:
   std::string renderTextElement(const TextElement &element) override;
 
 private:
+  /**
+   * Render children of an element to HTML, internal method used to minimize
+   * code reuse
+   */
   std::string
   renderChildrenGeneric(const std::vector<std::shared_ptr<Element>> &children);
 };

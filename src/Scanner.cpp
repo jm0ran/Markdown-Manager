@@ -19,11 +19,6 @@ std::shared_ptr<Element> Scanner::processLine(std::string &line) {
   return linePointer;
 }
 
-/**
- * Populates the children of a parent element with the line
- * @param parent the parent element to populate
- * @param line the line to populate the parent element with
- */
 void Scanner::populateChildren(std::shared_ptr<Element> parent,
                                std::string &line) {
   while (line.length() > 0) {
@@ -44,11 +39,6 @@ void Scanner::populateChildren(std::shared_ptr<Element> parent,
   }
 }
 
-/**
- * Extracts a header element from the line if it exists
- * @return a shared pointer to the header element if it exists, otherwise
- * nullptr
- */
 std::shared_ptr<Element> Scanner::extractHeader(std::string &line) {
   std::regex headerRegex("^#{1,6}\\ ");
   std::smatch match;
@@ -65,10 +55,6 @@ std::shared_ptr<Element> Scanner::extractHeader(std::string &line) {
   }
 }
 
-/**
- * Extracts a text element from the line if it exists
- * @return a shared pointer to the text element if it exists, otherwise nullptr
- */
 std::shared_ptr<Element> Scanner::extractText(std::string &line) {
   if (line.empty()) {
     return nullptr;
@@ -89,10 +75,6 @@ std::shared_ptr<Element> Scanner::extractText(std::string &line) {
   }
 }
 
-/**
- * Extracts a bold element from the line if it exists
- * @return a shared pointer to the bold element if it exists, otherwise nullptr
- */
 std::shared_ptr<Element> Scanner::extractBold(std::string &line) {
   std::regex boldRegex("^\\*\\*.*\\*\\*");
   std::smatch match;
@@ -107,11 +89,6 @@ std::shared_ptr<Element> Scanner::extractBold(std::string &line) {
   return nullptr;
 }
 
-/**
- * Extracts an italic element from the line if it exists
- * @return a shared pointer to the italic element if it exists, otherwise
- * nullptr
- */
 std::shared_ptr<Element> Scanner::extractItalic(std::string &line) {
   std::regex italicRegex("^\\*.*\\*");
   std::smatch match;
@@ -126,11 +103,6 @@ std::shared_ptr<Element> Scanner::extractItalic(std::string &line) {
   return nullptr;
 }
 
-/**
- * Extracts a highlighted element from the line if it exists
- * @return a shared pointer to the highlighted element if it exists, otherwise
- * nullptr
- */
 std::shared_ptr<Element> Scanner::extractHighlighted(std::string &line) {
   std::regex highlightRegex("^==.*==");
   std::smatch match;
@@ -145,11 +117,6 @@ std::shared_ptr<Element> Scanner::extractHighlighted(std::string &line) {
   return nullptr;
 }
 
-/**
- * Extracts a strikethrough element from the line if it exists
- * @return a shared pointer to the strikethrough element if it exists,
- * otherwise nullptr
- */
 std::shared_ptr<Element> Scanner::extractStrikethrough(std::string &line) {
   std::regex strikethroughRegex("^~~.*~~");
   std::smatch match;
